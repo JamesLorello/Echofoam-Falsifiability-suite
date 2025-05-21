@@ -20,4 +20,20 @@ If Echofoam holds up to scrutiny, it may offer a new pathway to understanding co
 1. Install requirements  
 ```bash  
 pip install numpy matplotlib  
+```
 
+
+2. Run the simulation or use the blockchain memory module as needed.
+
+## Blockchain Memory Scaffold
+
+The file `blockchain_memory.py` implements a minimal compressed memory chain where each entry references the previous block via its hash. The chain is saved to disk for persistence.
+
+### Example
+```python
+from blockchain_memory import BlockchainMemory
+
+mem = BlockchainMemory("demo_chain.json")
+block = mem.add_memory("an important observation")
+print(block.hash)
+```
