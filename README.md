@@ -1,6 +1,12 @@
 # Echofoam-Falsifiability-suite
 Scientific challenge suite for testing Echofoam Theory (emergent c, BAOs, redshift)
 # Echofoam Falsifiability Suite
+## 🔗 Cite This Release
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.YOUR_DOI_HERE.svg)](https://doi.org/10.5281/zenodo.YOUR_DOI_HERE)
+
+> Lorello, James. *Echofoam Falsifiability Suite v1.0*. Zenodo.  
+DOI: [10.5281/zenodo.YOUR_DOI_HERE](https://doi.org/10.5281/zenodo.YOUR_DOI_HERE)
 
 This repository contains a simplified simulation framework designed to test the Echofoam Theory of cosmological structure formation.
 
