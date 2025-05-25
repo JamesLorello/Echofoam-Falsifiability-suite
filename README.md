@@ -17,13 +17,17 @@ If Echofoam holds up to scrutiny, it may offer a new pathway to understanding co
 
 ## Getting Started
 
-1. Install requirements  
-```bash  
-pip install numpy matplotlib  
+1. Install requirements
+```bash
+pip install numpy matplotlib
 ```
 
+2. Run the Tkinter viewer to visualize the tension-based interface. Tkinter is bundled with Python on many systems (on some Linux distributions you may need to install `python3-tk`). Use the command:
+```bash
+python adaptive_gui.py
+```
 
-2. Run the simulation or use the blockchain memory module as needed.
+3. Run the simulation or use the blockchain memory module as needed.
 
 ## Blockchain Memory Scaffold
 
