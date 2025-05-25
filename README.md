@@ -25,13 +25,24 @@ pip install numpy matplotlib
 
 2. Run the simulation or use the blockchain memory module as needed.
 
+## Directory Structure
+
+Each major program lives in its own subdirectory:
+
+- `adaptive_gui/`
+- `blockchain_memory/`
+- `laser_filamentation/`
+- `mashup_maker/`
+- `teleportation/`
+- `weather_simulation/`
+
 ## Blockchain Memory Scaffold
 
-The file `blockchain_memory.py` implements a minimal compressed memory chain where each entry references the previous block via its hash. The chain is saved to disk for persistence.
+The `blockchain_memory` package implements a minimal compressed memory chain where each entry references the previous block via its hash. The chain is saved to disk for persistence.
 
 ### Example
 ```python
-from blockchain_memory import BlockchainMemory
+from blockchain_memory.blockchain_memory import BlockchainMemory
 
 mem = BlockchainMemory("demo_chain.json")
 block = mem.add_memory("an important observation")
