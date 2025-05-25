@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from matplotlib.animation import FuncAnimation, FFMpegWriter
+from matplotlib.animation import FuncAnimation, FFMpegWriter, writers
 
 # Simulation parameters
 size = 100
@@ -94,8 +94,11 @@ def update(frame):
 ani = FuncAnimation(fig, update, frames=steps, interval=50, blit=True, repeat=False)
 plt.tight_layout()
 
-writer = FFMpegWriter(fps=20)
-ani.save("simulation.mp4", writer=writer)
+if "ffmpeg" in writers.avail:
+    writer = FFMpegWriter(fps=20)
+    ani.save("simulation.mp4", writer=writer)
+else:
+    print("ffmpeg not available; skipping video output")
 
 if verdict is None:
     verdict = "Hypothesis failed"
