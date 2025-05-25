@@ -101,7 +101,7 @@ if verdict is None:
     verdict = "Hypothesis failed"
     verdict_step = steps - 1
 
-with open("epcd_results.txt", "w") as f:
+with open("echofoam_cosmo_log.txt", "w") as f:
     f.write(verdict + "\n")
 
 print(verdict)
