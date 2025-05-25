@@ -14,16 +14,35 @@ To allow open, scientific attempts to *falsify* the theory by evaluating its pre
 
 **Why?**  
 If Echofoam holds up to scrutiny, it may offer a new pathway to understanding cosmic memory, emergence, and tension as foundational to structure.
+## Dependencies
+
+The programs rely on the following packages:
+- numpy
+- matplotlib
+- pillow
+- moviepy
+- ffmpeg (for video creation)
+- tkinter (usually installed with Python)
+- pytest and flake8 (for tests and linting)
+
+A Conda environment file `environment.yml` is provided for convenience.
+
 
 ## Getting Started
 
-1. Install requirements  
-```bash  
-pip install numpy matplotlib  
+1. Create the Conda environment:
+```bash
+conda env create -f environment.yml
+conda activate echofoam
 ```
 
+Alternatively install with pip:
+```bash
+pip install numpy matplotlib pillow moviepy
+```
 
 2. Run the simulation or use the blockchain memory module as needed.
+
 
 ## Blockchain Memory Scaffold
 

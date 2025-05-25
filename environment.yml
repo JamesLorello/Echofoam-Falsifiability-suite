@@ -1,0 +1,12 @@
+name: echofoam
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - numpy
+  - matplotlib
+  - pillow
+  - moviepy
+  - ffmpeg
+  - pytest
+  - flake8
