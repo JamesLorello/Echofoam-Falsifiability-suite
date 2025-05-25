@@ -1,6 +1,5 @@
-# Echofoam-Falsifiability-suite
-Scientific challenge suite for testing Echofoam Theory (emergent c, BAOs, redshift)
 # Echofoam Falsifiability Suite
+Scientific challenge suite for testing Echofoam Theory (emergent c, BAOs, redshift)
 
 This repository contains a simplified simulation framework designed to test the Echofoam Theory of cosmological structure formation.
 
@@ -18,10 +17,9 @@ If Echofoam holds up to scrutiny, it may offer a new pathway to understanding co
 ## Getting Started
 
 1. Install requirements  
-```bash  
-pip install numpy matplotlib  
+```bash
+pip install numpy matplotlib
 ```
-
 
 2. Run the simulation or use the blockchain memory module as needed.
 
