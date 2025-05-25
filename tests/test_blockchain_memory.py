@@ -1,6 +1,6 @@
 import os
 import unittest
-from blockchain_memory import BlockchainMemory
+from echofoam_falsifiability.blockchain_memory import BlockchainMemory
 
 class BlockchainMemoryTest(unittest.TestCase):
     def setUp(self):

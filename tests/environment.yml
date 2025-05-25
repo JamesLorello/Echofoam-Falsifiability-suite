@@ -1,0 +1,12 @@
+name: echofoam-falsifiability
+channels:
+  - conda-forge
+dependencies:
+  - python>=3.8
+  - numpy
+  - scipy
+  - matplotlib
+  - pytest
+  - pip
+  - pip:
+      - echofoam-falsifiability-suite
