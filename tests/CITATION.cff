@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "Echofoam Falsifiability Suite"
+version: "0.1.0"
+doi: "10.5281/zenodo.1234567"
+authors:
+  - family-names: Lorello
+    given-names: James
+    affiliation: "Your Institution"
+    orcid: "https://orcid.org/0000-0002-1234-5678"
+date-released: 2025-05-24
+url: "https://github.com/JamesLorello/Echofoam-Falsifiability-suite"
