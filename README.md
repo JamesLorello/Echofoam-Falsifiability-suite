@@ -33,6 +33,10 @@ pip install numpy matplotlib
 
 2. Run the simulation or use the blockchain memory module as needed.
 
+The main `simulation.py` script now records scientific metrics for each frame in
+`metrics.json` and saves the final fields to `fields_final.npz` for further
+analysis.
+
 ## Blockchain Memory Scaffold
 
 The file `blockchain_memory.py` implements a minimal compressed memory chain where each entry references the previous block via its hash. The chain is saved to disk for persistence.

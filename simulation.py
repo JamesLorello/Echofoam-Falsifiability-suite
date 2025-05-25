@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation, FFMpegWriter
+from data_management import DataManager
 
 # Simulation parameters
 size = 100
@@ -11,6 +12,9 @@ tau = np.random.randn(size, size) * 0.1  # initial tension field
 psi = np.zeros((size, size))             # coherence field
 chi = np.zeros((size, size))             # wave field
 chi_prev = np.zeros_like(chi)
+
+# Data manager for metrics and field persistence
+data_mgr = DataManager()
 
 # Falsifiability parameters
 coherence_threshold = 0.8
@@ -85,6 +89,9 @@ def update(frame):
     im_psi.set_data(psi)
     im_chi.set_data(chi)
 
+    # record metrics for this frame
+    data_mgr.log_step(frame, tau, psi, chi, grad_mag)
+
     # save final frame
     if frame == steps - 1:
         plt.savefig("final_frame.png")
@@ -96,6 +103,7 @@ plt.tight_layout()
 
 writer = FFMpegWriter(fps=20)
 ani.save("simulation.mp4", writer=writer)
+data_mgr.save(tau, psi, chi)
 
 if verdict is None:
     verdict = "Hypothesis failed"
