@@ -15,6 +15,7 @@ psi = np.zeros((size, size))
 chi = np.zeros((size, size))
 
 # for visualization
+plt.ion()
 fig, axes = plt.subplots(2, 2, figsize=(8, 8))
 im_tau = axes[0, 0].imshow(tau, cmap='coolwarm', vmin=-2, vmax=2)
 axes[0, 0].set_title('tau')
@@ -35,6 +36,9 @@ for ax_row in axes:
     for ax in ax_row:
         ax.set_xticks([])
         ax.set_yticks([])
+
+plt.tight_layout()
+plt.show(block=False)
 
 frames_to_save = []
 
@@ -69,6 +73,7 @@ for step in range(steps):
     im_grad.set_data(grad_mag)
     im_psi.set_data(psi)
     im_chi.set_data(chi)
+    plt.pause(0.001)
 
     # save every 100th frame
     if step % 100 == 0:
@@ -78,6 +83,8 @@ for step in range(steps):
 # save final visualization
 plt.tight_layout()
 plt.savefig('weather.png')
+plt.ioff()
+plt.show()
 
 # prediction summary
 stable_regions = np.argwhere(psi > 0.6)
