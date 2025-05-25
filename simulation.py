@@ -3,7 +3,8 @@ import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation, FFMpegWriter
 
 # Simulation parameters
-size = 100
+# Increase grid resolution for higher fidelity output
+size = 200
 steps = 200
 
 # Fields
