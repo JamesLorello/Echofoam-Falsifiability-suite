@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation, FFMpegWriter
 
 # Simulation parameters
 size = 50
@@ -38,7 +39,8 @@ for ax_row in axes:
 
 frames_to_save = []
 
-for step in range(steps):
+def update(step):
+    global tau, psi, chi, grad_x, grad_y, grad_mag
     # random fluctuation with slight decay
     tau += 0.05 * np.random.randn(size, size)
     tau *= 0.99
@@ -75,16 +77,19 @@ for step in range(steps):
         plt.savefig(f'frame_{step}.png')
         frames_to_save.append(step)
 
-# save final visualization
+    if step == steps - 1:
+        plt.savefig('weather.png')
+        stable_regions = np.argwhere(psi > 0.6)
+        collapsing_regions = np.argwhere(chi < 0.2)
+        summary = f"Stable cells: {len(stable_regions)}\nCollapsing cells: {len(collapsing_regions)}"
+        print(summary)
+        with open('weather_log.txt', 'w') as f:
+            f.write('Frames saved: ' + ', '.join(map(str, frames_to_save)) + '\n')
+            f.write(summary + '\n')
+
+    return im_tau, im_grad, im_psi, im_chi
+
+ani = FuncAnimation(fig, update, frames=steps, interval=50, blit=False, repeat=False)
 plt.tight_layout()
-plt.savefig('weather.png')
-
-# prediction summary
-stable_regions = np.argwhere(psi > 0.6)
-collapsing_regions = np.argwhere(chi < 0.2)
-summary = f"Stable cells: {len(stable_regions)}\nCollapsing cells: {len(collapsing_regions)}"
-print(summary)
-
-with open('weather_log.txt', 'w') as f:
-    f.write('Frames saved: ' + ', '.join(map(str, frames_to_save)) + '\n')
-    f.write(summary + '\n')
+writer = FFMpegWriter(fps=20)
+ani.save('weather.mp4', writer=writer)

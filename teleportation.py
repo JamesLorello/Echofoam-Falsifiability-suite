@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from matplotlib.animation import FuncAnimation
+from matplotlib.animation import FuncAnimation, FFMpegWriter
 
 # Grid size and simulation steps
 size = 100
@@ -94,5 +94,6 @@ def update(frame):
 
 ani = FuncAnimation(fig, update, frames=steps, interval=50, blit=True, repeat=False)
 plt.tight_layout()
-ani.save("teleport.mp4", writer="ffmpeg")
+writer = FFMpegWriter(fps=20)
+ani.save("teleport.mp4", writer=writer)
 plt.close(fig)
