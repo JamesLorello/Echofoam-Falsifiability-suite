@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 
 
-def main():
+def create_animation():
     size = 50
     tau = np.zeros((size, size))
     tau[size // 2, size // 2] = 1.0
@@ -44,6 +44,11 @@ def main():
 
     ani = FuncAnimation(fig, step, frames=500, interval=50, blit=False)
     plt.tight_layout()
+    return fig, ani
+
+
+def main():
+    fig, _ = create_animation()
     plt.show()
 
 if __name__ == '__main__':
