@@ -5,6 +5,10 @@ import matplotlib.pyplot as plt
 size = 50
 steps = 200
 
+# Visualization parameters
+FIGSIZE = (12, 12)
+DPI = 200
+
 # Fields
 # tau: temperature-pressure memory field
 np.random.seed(0)
@@ -15,7 +19,7 @@ psi = np.zeros((size, size))
 chi = np.zeros((size, size))
 
 # for visualization
-fig, axes = plt.subplots(2, 2, figsize=(8, 8))
+fig, axes = plt.subplots(2, 2, figsize=FIGSIZE)
 im_tau = axes[0, 0].imshow(tau, cmap='coolwarm', vmin=-2, vmax=2)
 axes[0, 0].set_title('tau')
 
@@ -72,12 +76,12 @@ for step in range(steps):
 
     # save every 100th frame
     if step % 100 == 0:
-        plt.savefig(f'frame_{step}.png')
+        plt.savefig(f'frame_{step}.png', dpi=DPI)
         frames_to_save.append(step)
 
 # save final visualization
 plt.tight_layout()
-plt.savefig('weather.png')
+plt.savefig('weather.png', dpi=DPI)
 
 # prediction summary
 stable_regions = np.argwhere(psi > 0.6)
