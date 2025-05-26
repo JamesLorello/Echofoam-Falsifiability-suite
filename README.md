@@ -59,3 +59,6 @@ python -m echofoam_falsifiability.weather_sphere --radius 1.0 --theta 1.57 --phi
 ```
 Adjust the parameters to explore different sphere sizes, angular extents and terrain bumpiness.
 Use `--show` to display an updating 3D view. A final `weather_sphere.png` image is also saved.
+
+## Game Engine Prototype
+See [docs/game_engine.md](docs/game_engine.md) for a small Pygame-based demo. The `tension_game.py` script shows how "echofoam logic" can drive gameplay using a simple tension metric.
