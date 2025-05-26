@@ -45,3 +45,13 @@ mem = BlockchainMemory("demo_chain.json")
 block = mem.add_memory("an important observation")
 print(block.hash)
 ```
+
+## Weather Sphere Simulation
+The module `weather_sphere.py` provides a simple 3D fluid field in spherical coordinates. It models the atmosphere as a thin shell above a bumpy terrain and visualizes a slice of the final temperature-pressure field.
+
+### Usage
+```bash
+python -m echofoam_falsifiability.weather_sphere --radius 1.0 --theta 1.57 --phi 6.28 --bump 0.05 --steps 200 --show
+```
+Adjust the parameters to explore different sphere sizes, angular extents and terrain bumpiness.
+Use `--show` to display an updating 3D view. A final `weather_sphere.png` image is also saved.
