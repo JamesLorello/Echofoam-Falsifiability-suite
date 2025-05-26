@@ -64,6 +64,10 @@ def create_animation():
     return fig, anim
 
 
-if __name__ == "__main__":
+def main():
     fig, _ = create_animation()
     plt.show()
+
+
+if __name__ == "__main__":
+    main()

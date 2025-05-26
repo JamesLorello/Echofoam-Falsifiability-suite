@@ -57,6 +57,10 @@ def create_animation(grid_size=128, timesteps=400, alpha=0.01, beta=0.05,
     return fig, anim
 
 
-if __name__ == "__main__":
+def main():
     fig, _ = create_animation()
     plt.show()
+
+
+if __name__ == "__main__":
+    main()
