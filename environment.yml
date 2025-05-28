@@ -10,3 +10,4 @@ dependencies:
   - moviepy
   - ffmpeg
   - pytest
+  - pygame
