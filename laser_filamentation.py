@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import os
 
 
-def run_simulation(grid_size=128, timesteps=400, save_interval=50,
+def run_simulation(grid_size=1000, timesteps=5000, save_interval=25,
                    alpha=0.01, beta=0.05, collapse_threshold=2.0,
                    intensity_threshold=0.1):
     """Run a simple 2D laser filamentation simulation."""
