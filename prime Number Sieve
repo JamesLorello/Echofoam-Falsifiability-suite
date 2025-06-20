@@ -1,0 +1,56 @@
+import json
+import os
+
+PRIME_FILE = "fixed_primes.json"
+CHECKPOINT_EVERY = 1000  # Adjust if needed
+
+def load_state():
+    if os.path.exists(PRIME_FILE):
+        try:
+            with open(PRIME_FILE, "r") as f:
+                data = json.load(f)
+            primes = list(data["primes"].values())
+            print(f"🔁 Resuming from {len(primes)} known primes.")
+        except json.JSONDecodeError:
+            print("⚠️ Corrupted file. Starting fresh.")
+            primes = [2]
+    else:
+        primes = [2]
+        print("🆕 Starting fresh.")
+    return primes
+
+def save_state(primes):
+    indexed = {str(i + 1): p for i, p in enumerate(primes)}
+    tmp_file = PRIME_FILE + ".tmp"
+    with open(tmp_file, "w") as f:
+        json.dump({"primes": indexed}, f, indent=2)
+    os.replace(tmp_file, PRIME_FILE)
+    print(f"💾 Checkpointed {len(primes)} primes.")
+
+def infinite_prime_sieve():
+    primes = load_state()
+    last_checked = primes[-1] + 1
+    prime_set = set(primes)  # Optional: fast lookup
+
+    while True:
+        is_composite = False
+        for p in primes:
+            if p * p > last_checked:
+                break
+            if last_checked % p == 0:
+                is_composite = True
+                break
+
+        if not is_composite:
+            primes.append(last_checked)
+
+            if len(primes) % CHECKPOINT_EVERY == 0:
+                save_state(primes)
+
+        last_checked += 1
+
+if __name__ == "__main__":
+    try:
+        infinite_prime_sieve()
+    except KeyboardInterrupt:
+        print("\n🛑 Gracefully stopped.")
