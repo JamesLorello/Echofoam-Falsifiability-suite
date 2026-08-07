@@ -1,64 +1,56 @@
-# Echofoam-Falsifiability-suite
-Scientific challenge suite for testing Echofoam Theory (emergent c, BAOs, redshift)
-# Echofoam Falsifiability Suite
-## 🔗 Cite This Release
-
-## 📌 Cite This Release
+# Falsifiable Coherence and Memory Assays
 
 [![DOI](https://zenodo.org/badge/961712182.svg)](https://doi.org/10.5281/zenodo.15505391)
 
-> Lorello, James. *Echofoam Falsifiability Suite v1.0*. Zenodo.  
+This repository preserves the historical **Echofoam Falsifiability Suite** while rebuilding it as a mechanism-first collection of reproducible numerical assays.
+
+## Scientific status
+
+This codebase is a sandbox for testing explicit dynamical mechanisms. It is not a validated theory of cosmology, gravity, consciousness, dark matter, or dark energy.
+
+| Item | Current status |
+| --- | --- |
+| Legacy animation suite | Demonstration code; does not discriminate physical hypotheses |
+| Emergent propagation speed vCF-1.1 | Falsified: measured speed about 0.3559 versus prediction 1 |
+| Legacy BAO-like visual outputs | Unverified until raw outputs and matched controls are recovered |
+| Delayed-memory pattern claim | Not reproduced by the current reconstruction; confirmatory status remains inconclusive |
+| Ledger/fatigue separation | Toy-model behavior, internally testable, physical interpretation unresolved |
+| Present-gated history effect | Open; counts only if the gate emerges from local dynamics |
+
+See [Scientific Status](docs/SCIENTIFIC_STATUS.md) for the evidence boundary and [Repository Map](docs/REPOSITORY_MAP.md) for the migration plan.
+
+## Canonical assay
+
+The first canonical assay compares delayed memory against:
+
+- no memory,
+- shuffled memory,
+- instantaneous feedback.
+
+It reports boundedness, variance survival, dominant spectral scale, spectral entropy, and paired branch differences. A memory-field correlation is never treated by itself as evidence that memory generated structure.
+
+The current analysis is exploratory. Its paired medians do not supply a significance test, uncertainty interval, or preregistered material-effect threshold, so they cannot by themselves retire a mechanism.
+
+```bash
+python -m pip install -e ".[test]"
+python -m echofoam_falsifiability.memory_coupling_audit --runs 24 --steps 1200
+pytest
+```
+
+Outputs are written to `audit_output/runs.csv` and `audit_output/summary.json`.
+
+## Repository policy
+
+- `src/echofoam_falsifiability/` is the only canonical Python package.
+- Root-level scripts and duplicate modules are retained temporarily as legacy material.
+- Tests must evaluate observables or invariants, not merely whether a visualization opens.
+- Every claimed mechanism needs matched null, shuffled, ablated, or instantaneous controls.
+- Raw results, parameters, seeds, code revision, and analysis criteria must travel together.
+- Negative results and falsified versions remain part of the record.
+
+## Historical citation
+
+Lorello, James. *Echofoam Falsifiability Suite v1.0*. Zenodo.  
 DOI: [10.5281/zenodo.15505391](https://doi.org/10.5281/zenodo.15505391)
 
-This repository contains a simplified simulation framework designed to test the Echofoam Theory of cosmological structure formation.
-
-**Purpose:**  
-To allow open, scientific attempts to *falsify* the theory by evaluating its predictions under clean, documented conditions.
-
-**Included Tests:**
-- Emergent `c` (causality propagation without injected constants)
-- BAO ring emergence via foam burst tension
-- Redshift via tension drag ("Echoshift")
-
-**Why?**  
-If Echofoam holds up to scrutiny, it may offer a new pathway to understanding cosmic memory, emergence, and tension as foundational to structure.
-
-## Getting Started
-
-1. Install requirements
-```bash
-pip install numpy matplotlib
-```
-
-2. Run the Tkinter viewer to visualize the tension-based interface. Tkinter is bundled with Python on many systems (on some Linux distributions you may need to install `python3-tk`). Use the command:
-```bash
-python adaptive_gui.py
-```
-
-3. Run the simulation or use the blockchain memory module as needed.
-
-## Blockchain Memory Scaffold
-
-The file `blockchain_memory.py` implements a minimal compressed memory chain where each entry references the previous block via its hash. The chain is saved to disk for persistence.
-
-### Example
-```python
-from blockchain_memory import BlockchainMemory
-
-mem = BlockchainMemory("demo_chain.json")
-block = mem.add_memory("an important observation")
-print(block.hash)
-```
-
-## Weather Sphere Simulation
-The module `weather_sphere.py` provides a simple 3D fluid field in spherical coordinates. It models the atmosphere as a thin shell above a bumpy terrain and visualizes a slice of the final temperature-pressure field.
-
-### Usage
-```bash
-python -m echofoam_falsifiability.weather_sphere --radius 1.0 --theta 1.57 --phi 6.28 --bump 0.05 --steps 200 --show
-```
-Adjust the parameters to explore different sphere sizes, angular extents and terrain bumpiness.
-Use `--show` to display an updating 3D view. A final `weather_sphere.png` image is also saved.
-
-## Game Engine Prototype
-See [docs/game_engine.md](docs/game_engine.md) for a small Pygame-based demo. The `tension_game.py` script shows how "echofoam logic" can drive gameplay using a simple tension metric.
+The DOI refers to the historical release. Claims in that release should be read with the status qualifications in this repository.
