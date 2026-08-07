@@ -1,5 +1,6 @@
 import os
 import sys
+import importlib
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import unittest
 from matplotlib.figure import Figure
@@ -7,7 +8,7 @@ from matplotlib.animation import FuncAnimation
 
 class TestCreateAnimation(unittest.TestCase):
     def _check_module(self, module_name):
-        mod = __import__(module_name)
+        mod = importlib.import_module(module_name)
         if not hasattr(mod, "create_animation"):
             self.fail(f"{module_name}.create_animation does not exist")
         fig, anim = mod.create_animation()
@@ -24,7 +25,7 @@ class TestCreateAnimation(unittest.TestCase):
         self._check_module("weather_simulation")
 
     def test_laser_filamentation(self):
-        self._check_module("laser_filamentation")
+        self._check_module("echofoam_falsifiability.laser_filamentation")
 
 if __name__ == "__main__":
     unittest.main()

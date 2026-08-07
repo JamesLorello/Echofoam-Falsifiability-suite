@@ -19,7 +19,9 @@ The vCF-1.1 prediction assigned an emergent speed of 1. The measured value was a
 
 The stored `Echofoamsim.txt` contained damaged code and prose claiming a 38.7% resonant fraction. No corresponding JSON results, plots, or output directory were recovered. A conservative reconstruction compared delayed memory, no memory, shuffled memory, and instantaneous feedback over 24 matched seeds.
 
-All branches selected the lowest nonzero box mode. The field retained roughly 1.1e-5 of its initial variance. Delayed memory raised field correlation but did not materially change scale, spectral concentration, entropy, or variance survival. Status: **the memory-generated pattern claim is retired; tracking behavior is internally reproduced**.
+In the repaired reconstruction run, all branches selected the lowest nonzero box mode. Delayed memory raised field correlation without an obvious paired separation in scale, spectral concentration, entropy, or variance survival. The assay reports paired medians but has no confirmatory uncertainty calculation or preregistered material-effect threshold. Status: **not reproduced by this reconstruction; confirmatory status remains inconclusive**.
+
+The shuffled control uses the same zero-initialized delayed-memory update as the full branch, followed by one fixed spatial permutation. This preserves temporal filtering and marginal values while removing pointwise spatial correspondence. Re-permuting independently at every step would add temporal noise and would not be a matched control.
 
 ### BAO-like features
 

@@ -5,12 +5,15 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import os
+import platform
 from dataclasses import asdict, dataclass
 from pathlib import Path
 
 import numpy as np
 
 BRANCHES = ("full_memory", "no_memory", "shuffled_memory", "instant_feedback")
+METRICS = ("prominence", "k_star", "spectral_entropy", "variance_ratio")
 
 
 @dataclass(frozen=True)
@@ -55,6 +58,10 @@ def div_psi_grad_tau(psi: np.ndarray, tau: np.ndarray, dx: float) -> np.ndarray:
 
 
 def radial_metrics(field: np.ndarray, dx: float) -> dict[str, float]:
+    if field.ndim != 2 or field.shape[0] != field.shape[1]:
+        raise ValueError("radial_metrics requires a square two-dimensional field")
+    if dx <= 0:
+        raise ValueError("dx must be positive")
     centered = field - np.mean(field)
     power = np.abs(np.fft.fft2(centered)) ** 2
     n = field.shape[0]
@@ -91,7 +98,10 @@ def simulate(
 ) -> dict[str, float | bool | str]:
     psi, tau = psi0.copy(), tau0.copy()
     memory = np.zeros_like(psi)
-    shuffled = rng.permutation(psi0.ravel()).reshape(psi0.shape)
+    # The shuffled branch uses the same zero-initialized, delayed memory field as
+    # the full branch. A single fixed permutation removes spatial correspondence
+    # while preserving its marginal values and temporal filtering.
+    shuffle_index = rng.permutation(psi.size)
     decay = np.log(2.0) / params.memory_half_life
     initial_variance = float(np.var(psi))
     bounded = True
@@ -101,8 +111,8 @@ def simulate(
             memory += dt * decay * (psi - memory)
             target, coupling = memory, params.memory_strength
         elif branch == "shuffled_memory":
-            shuffled += dt * decay * (psi - shuffled)
-            target = rng.permutation(shuffled.ravel()).reshape(psi.shape)
+            memory += dt * decay * (psi - memory)
+            target = memory.ravel()[shuffle_index].reshape(psi.shape)
             coupling = params.memory_strength
         elif branch == "instant_feedback":
             target, coupling = psi, params.memory_strength
@@ -156,6 +166,14 @@ def run_assay(
     dx: float = 1.0,
     seed: int = 50,
 ) -> tuple[list[dict], dict]:
+    if runs < 1:
+        raise ValueError("runs must be at least 1")
+    if steps < 1:
+        raise ValueError("steps must be at least 1")
+    if size < 4:
+        raise ValueError("size must be at least 4")
+    if dt <= 0 or dx <= 0:
+        raise ValueError("dt and dx must be positive")
     rows: list[dict] = []
     for run in range(runs):
         parameter_seed = seed + run
@@ -172,7 +190,21 @@ def run_assay(
                 **simulate(params, branch, psi0, tau0, branch_rng, steps=steps, dt=dt, dx=dx),
             })
 
-    summary: dict[str, dict] = {}
+    summary: dict[str, dict] = {
+        "assay_manifest": {
+            "runs": runs,
+            "steps": steps,
+            "size": size,
+            "dt": dt,
+            "dx": dx,
+            "seed": seed,
+            "branches": list(BRANCHES),
+            "python_version": platform.python_version(),
+            "numpy_version": np.__version__,
+            "commit_sha": os.environ.get("GITHUB_SHA", "unrecorded"),
+            "analysis_status": "exploratory; no confirmatory threshold is applied",
+        }
+    }
     for branch in BRANCHES:
         selected = [row for row in rows if row["branch"] == branch and row["bounded"]]
         summary[branch] = {"runs": runs, "bounded_fraction": len(selected) / runs}
@@ -187,7 +219,7 @@ def run_assay(
     for control in BRANCHES[1:]:
         control_rows = {row["run"]: row for row in rows if row["branch"] == control}
         paired[control] = {}
-        for metric in ("prominence", "k_star", "spectral_entropy", "variance_ratio"):
+        for metric in METRICS:
             deltas = [full[i][metric] - control_rows[i][metric] for i in full]
             paired[control][f"median_full_minus_control_{metric}"] = float(np.nanmedian(deltas))
     summary["paired_comparisons"] = paired

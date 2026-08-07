@@ -13,7 +13,7 @@ This codebase is a sandbox for testing explicit dynamical mechanisms. It is not 
 | Legacy animation suite | Demonstration code; does not discriminate physical hypotheses |
 | Emergent propagation speed vCF-1.1 | Falsified: measured speed about 0.3559 versus prediction 1 |
 | Legacy BAO-like visual outputs | Unverified until raw outputs and matched controls are recovered |
-| Delayed-memory pattern claim | Retired by matched controls; behavior is consistent with diffusion and box-scale coarsening |
+| Delayed-memory pattern claim | Not reproduced by the current reconstruction; confirmatory status remains inconclusive |
 | Ledger/fatigue separation | Toy-model behavior, internally testable, physical interpretation unresolved |
 | Present-gated history effect | Open; counts only if the gate emerges from local dynamics |
 
@@ -28,6 +28,8 @@ The first canonical assay compares delayed memory against:
 - instantaneous feedback.
 
 It reports boundedness, variance survival, dominant spectral scale, spectral entropy, and paired branch differences. A memory-field correlation is never treated by itself as evidence that memory generated structure.
+
+The current analysis is exploratory. Its paired medians do not supply a significance test, uncertainty interval, or preregistered material-effect threshold, so they cannot by themselves retire a mechanism.
 
 ```bash
 python -m pip install -e ".[test]"

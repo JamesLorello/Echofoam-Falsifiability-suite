@@ -29,3 +29,5 @@ Game, weather, laser, teleportation, art, GUI, and blockchain prototypes are pre
 7. Tag a new release only after CI reproduces the canonical assays.
 
 No historical file should be silently erased because a failed version is evidence about the development path.
+
+The inventory must record `old_path`, `retained_path`, content hash, import users, associated claim, and last historical commit. Before relocation, legacy imports receive either a compatibility wrapper with a deprecation notice or a documented breaking-change decision. A duplicate is eligible for deletion only after this mapping is committed and its retained copy is verified.
