@@ -47,7 +47,7 @@ def create_animation():
     step_size = 0.4
 
     def update(frame):
-        nonlocal psi_center, psi, tau, chi, grad_x, grad_y, grad_mag, teleport_complete
+        nonlocal psi_center, psi, tau, grad_x, grad_y, grad_mag, teleport_complete
 
         if frame == teleport_start:
             tau -= ring_field(target_center, size=size)
