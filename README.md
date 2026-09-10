@@ -16,12 +16,23 @@ This codebase is a sandbox for testing explicit dynamical mechanisms. It is not 
 | Delayed-memory pattern claim | Not reproduced by the current reconstruction; confirmatory status remains inconclusive |
 | Ledger/fatigue separation | Toy-model behavior, internally testable, physical interpretation unresolved |
 | Present-gated history effect | Open; counts only if the gate emerges from local dynamics |
+| Aligned-vs-rotated interaction | Toy assay shows an orientation-dependent nonlinear persistence increment above its linear baseline; conventional nonlinear dynamics remain the default explanation |
 
-See [Scientific Status](docs/SCIENTIFIC_STATUS.md) for the evidence boundary and [Repository Map](docs/REPOSITORY_MAP.md) for the migration plan.
+See [Scientific Status](docs/SCIENTIFIC_STATUS.md) for the evidence boundary, [2026-09-10 Project Checkpoint](docs/PROJECT_STATUS_2026-09-10.md) for the current research frontier, and [Repository Map](docs/REPOSITORY_MAP.md) for the migration plan.
 
-## Canonical assay
+## Current orientation assay
 
-The first canonical assay compares delayed memory against:
+The current controlled experiment compares identical crossing field packets with aligned versus orthogonal internal orientation. It includes a matched linear ablation so that ordinary superposition is not mistaken for a nonlinear history/alignment effect.
+
+```bash
+python src/echofoam_falsifiability/aligned_rotated_assay.py --seeds 24
+```
+
+The first 24-seed run produced a nonlinear aligned-minus-rotated persistence-AUC difference of about `+0.110494`, while the linear ablation already produced about `+0.069871`. The resulting difference-of-differences was about `+0.040623`. This is a property of the toy equations, not evidence that nature implements the mechanism.
+
+## Canonical memory assay
+
+The earlier canonical assay compares delayed memory against:
 
 - no memory,
 - shuffled memory,
