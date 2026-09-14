@@ -16,19 +16,36 @@ This codebase is a sandbox for testing explicit dynamical mechanisms. It is not 
 | Delayed-memory pattern claim | Not reproduced by the current reconstruction; confirmatory status remains inconclusive |
 | Ledger/fatigue separation | Toy-model behavior, internally testable, physical interpretation unresolved |
 | Present-gated history effect | Open; counts only if the gate emerges from local dynamics |
-| Aligned-vs-rotated interaction | Toy assay shows an orientation-dependent nonlinear persistence increment above its linear baseline; conventional nonlinear dynamics remain the default explanation |
+| Aligned-vs-rotated interaction | Energy-matched 24-seed angle sweep passes its 1% material threshold and null-control gates; conventional nonlinear reaction and diffusion remain the default explanation |
 
 See [Scientific Status](docs/SCIENTIFIC_STATUS.md) for the evidence boundary, [2026-09-10 Project Checkpoint](docs/PROJECT_STATUS_2026-09-10.md) for the current research frontier, and [Repository Map](docs/REPOSITORY_MAP.md) for the migration plan.
 
 ## Current orientation assay
 
-The current controlled experiment compares identical crossing field packets with aligned versus orthogonal internal orientation. It includes a matched linear ablation so that ordinary superposition is not mistaken for a nonlinear history/alignment effect.
+The current experiment sweeps relative internal orientation from 0 to 90 degrees
+on a 5-degree grid. It matches initial energy point by point, subtracts an
+analytic solution of the matched linear discretization, and includes spatially
+shuffled orientations and separated noninteracting packet controls. Fixed seed
+blocks pair all angles and conditions; a bootstrap reports endpoint intervals
+and simultaneous uncertainty bands for the control curves.
 
 ```bash
-python src/echofoam_falsifiability/aligned_rotated_assay.py --seeds 24
+python -m pip install -e ".[test]"
+python -m echofoam_falsifiability.orientation_control_pass --seeds 24 --seed 0 --workers 4 --angle-step 5 --bootstraps 10000 --bootstrap-seed 20260913 --material-fraction 0.01 --output orientation_control_output
 ```
 
-The first 24-seed run produced a nonlinear aligned-minus-rotated persistence-AUC difference of about `+0.110494`, while the linear ablation already produced about `+0.069871`. The resulting difference-of-differences was about `+0.040623`. This is a property of the toy equations, not evidence that nature implements the mechanism.
+The strengthened pass gives an adjusted aligned-minus-orthogonal increment of
+**1.3738%** (paired seed-bootstrap 95% interval **1.3736% to 1.3740%**), exceeding
+the **1%** threshold declared before the sweep. All full-run control gates pass.
+Timestep and grid endpoint checks retain a similar primary effect. See the
+[protocol](docs/ORIENTATION_CONTROL_PROTOCOL.md),
+[results and limitations](docs/ORIENTATION_CONTROL_RESULTS_2026-09-13.md), and
+[raw outputs](results/orientation_control_2026-09-13).
+
+The original `aligned_rotated_assay.py` remains available. Its earlier
+difference-of-differences was `+0.040623 AUC`; the new initialization is stronger
+and explicitly different. Neither assay introduces a retained memory variable
+or establishes that nature implements the toy mechanism.
 
 ## Canonical memory assay
 

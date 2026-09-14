@@ -1,0 +1,252 @@
+{
+  "verdict": "INCONCLUSIVE_OR_CONTROLS_FAIL",
+  "gates": {
+    "pointwise_energy_matched": true,
+    "separated_packets_effectively_noninteracting": true,
+    "primary_above_material_threshold": true,
+    "shuffled_equivalent_to_zero_across_sweep": true,
+    "separated_equivalent_to_zero_across_sweep": true,
+    "coherent_exceeds_each_control": false
+  },
+  "material_fraction": 0.01,
+  "primary_paired_fraction": {
+    "mean": 0.013714979993677545,
+    "ci95": [
+      0.013708549761259514,
+      0.013721229572466716
+    ],
+    "paired_sd": 7.983931140064766e-06,
+    "paired_dz": 1717.8229312191047,
+    "paired_dz_ci95": null
+  },
+  "primary_minus_controls": {
+    "shuffled": {
+      "mean": 0.011776472080018491,
+      "ci95": [
+        0.009914101676679192,
+        0.013112021357360865
+      ],
+      "paired_sd": 0.0019855357757884054,
+      "paired_dz": 5.931130641724326,
+      "paired_dz_ci95": null
+    },
+    "separated": {
+      "mean": 0.013714979992090088,
+      "ci95": [
+        0.013708549759672332,
+        0.013721229570879007
+      ],
+      "paired_sd": 7.983931139731376e-06,
+      "paired_dz": 1717.8229310920053,
+      "paired_dz_ci95": null
+    }
+  },
+  "reference_linear_90_auc_mean": 1.194317390490045,
+  "simultaneous_bootstrap_critical_value": 2.0531270215828763,
+  "curves": [
+    {
+      "condition": "coherent",
+      "angle_deg": 0.0,
+      "nonlinear_auc_mean": 1.4211604719041344,
+      "linear_auc_mean": 1.3020959817736997,
+      "paired_auc": {
+        "mean": 0.01638003913088326,
+        "ci95": [
+          0.016372304236083157,
+          0.016387774025683366
+        ],
+        "paired_sd": 9.590974096779719e-06,
+        "paired_dz": 1707.8598029352463,
+        "paired_dz_ci95": null
+      },
+      "paired_fraction": {
+        "mean": 0.013714979993677545,
+        "ci95": [
+          0.013708549761259514,
+          0.013721229572466716
+        ],
+        "paired_sd": 7.983931140064766e-06,
+        "paired_dz": 1717.8229312191047,
+        "paired_dz_ci95": null
+      },
+      "simultaneous_fraction_ci95": [
+        0.013706783981296483,
+        0.013723176006058607
+      ]
+    },
+    {
+      "condition": "coherent",
+      "angle_deg": 90.0,
+      "nonlinear_auc_mean": 1.297001841489596,
+      "linear_auc_mean": 1.194317390490045,
+      "paired_auc": {
+        "mean": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "paired_sd": 0.0,
+        "paired_dz": null,
+        "paired_dz_ci95": null
+      },
+      "paired_fraction": {
+        "mean": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "paired_sd": 0.0,
+        "paired_dz": null,
+        "paired_dz_ci95": null
+      },
+      "simultaneous_fraction_ci95": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "condition": "shuffled",
+      "angle_deg": 0.0,
+      "nonlinear_auc_mean": 0.6174648791443771,
+      "linear_auc_mean": 0.5888411374299024,
+      "paired_auc": {
+        "mean": 0.0023152295040798077,
+        "ci95": [
+          0.0007216046110098961,
+          0.004531885151923654
+        ],
+        "paired_sd": 0.002365032860782593,
+        "paired_dz": 0.9789417908187942,
+        "paired_dz_ci95": null
+      },
+      "paired_fraction": {
+        "mean": 0.0019385079136590509,
+        "ci95": [
+          0.000604194236716571,
+          0.0037944480845803234
+        ],
+        "paired_sd": 0.0019801839463076255,
+        "paired_dz": 0.978953453932254,
+        "paired_dz_ci95": null
+      },
+      "simultaneous_fraction_ci95": [
+        -9.427667027534967e-05,
+        0.003971292497593451
+      ]
+    },
+    {
+      "condition": "shuffled",
+      "angle_deg": 90.0,
+      "nonlinear_auc_mean": 0.5842819251919962,
+      "linear_auc_mean": 0.5579734129816014,
+      "paired_auc": {
+        "mean": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "paired_sd": 0.0,
+        "paired_dz": null,
+        "paired_dz_ci95": null
+      },
+      "paired_fraction": {
+        "mean": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "paired_sd": 0.0,
+        "paired_dz": null,
+        "paired_dz_ci95": null
+      },
+      "simultaneous_fraction_ci95": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "condition": "separated",
+      "angle_deg": 0.0,
+      "nonlinear_auc_mean": 1.252170336199596,
+      "linear_auc_mean": 1.194330069627505,
+      "paired_auc": {
+        "mean": 1.89592785915238e-12,
+        "ci95": [
+          1.8955947922449923e-12,
+          1.896427459513461e-12
+        ],
+        "paired_sd": 5.285718846720614e-16,
+        "paired_dz": 3586.8874492419486,
+        "paired_dz_ci95": null
+      },
+      "paired_fraction": {
+        "mean": 1.587457299813823e-12,
+        "ci95": [
+          1.5871832963907103e-12,
+          1.5878990744509217e-12
+        ],
+        "paired_sd": 4.4059936655485684e-16,
+        "paired_dz": 3602.949573501433,
+        "paired_dz_ci95": null
+      },
+      "simultaneous_fraction_ci95": [
+        1.58700499658124e-12,
+        1.587909603046406e-12
+      ]
+    },
+    {
+      "condition": "separated",
+      "angle_deg": 90.0,
+      "nonlinear_auc_mean": 1.2521703361443726,
+      "linear_auc_mean": 1.1943300695741776,
+      "paired_auc": {
+        "mean": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "paired_sd": 0.0,
+        "paired_dz": null,
+        "paired_dz_ci95": null
+      },
+      "paired_fraction": {
+        "mean": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "paired_sd": 0.0,
+        "paired_dz": null,
+        "paired_dz_ci95": null
+      },
+      "simultaneous_fraction_ci95": [
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "diagnostics": [
+    {
+      "seed": 0,
+      "max_pointwise_energy_relative_error": 6.020940977021793e-16,
+      "separated_max_normalized_curve_leakage": 3.8969478685646486e-15
+    },
+    {
+      "seed": 1,
+      "max_pointwise_energy_relative_error": 3.0252325953443026e-16,
+      "separated_max_normalized_curve_leakage": 3.892936320526452e-15
+    },
+    {
+      "seed": 2,
+      "max_pointwise_energy_relative_error": 3.9851625454131747e-16,
+      "separated_max_normalized_curve_leakage": 3.892068958788464e-15
+    },
+    {
+      "seed": 3,
+      "max_pointwise_energy_relative_error": 4.024246346460629e-16,
+      "separated_max_normalized_curve_leakage": 3.896243137152533e-15
+    }
+  ],
+  "scope": "Finite-grid nonlinear vector-field toy dynamics; no physical or memory claim.",
+  "uncertainty_scope": "Seed variation conditional on this geometry, equation, grid, and timestep."
+}

@@ -58,6 +58,7 @@ venv.bak/
 # Generated scientific assay artifacts
 audit_output/
 smoke_output/
+orientation_control_output/
 *.mp4
 frame_*.png
 final_frame.png
