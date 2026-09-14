@@ -32,8 +32,8 @@ class Params:
 
 def lap(a: np.ndarray, dx: float) -> np.ndarray:
     return (
-        np.roll(a, 1, 0) + np.roll(a, -1, 0)
-        + np.roll(a, 1, 1) + np.roll(a, -1, 1)
+        np.roll(a, 1, -2) + np.roll(a, -1, -2)
+        + np.roll(a, 1, -1) + np.roll(a, -1, -1)
         - 4 * a
     ) / dx**2
 
@@ -94,7 +94,9 @@ def run_one(condition: str, seed: int, nonlinear: bool, p: Params):
 
     times = np.asarray(times)
     local_fraction = np.asarray(local_fraction)
-    persistence = np.trapezoid(local_fraction, times)
+    persistence = np.sum(
+        0.5 * (local_fraction[1:] + local_fraction[:-1]) * np.diff(times)
+    )
     crossing = np.where(local_fraction <= 0.5)[0]
     half_life = times[crossing[0]] if len(crossing) else times[-1]
     return persistence, half_life

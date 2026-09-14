@@ -100,3 +100,24 @@ The narrow positive result may still be conventional nonlinear dynamics. That or
 ## Research priority
 
 For now, cosmological and gravitational interpretations remain downstream. The highest-value work is to determine whether history/alignment-dependent persistence survives strong controls and whether it produces a prediction not already expected from standard nonlinear field dynamics.
+
+## Follow-up control pass: 2026-09-13
+
+The energy-matched orientation pass now covers items 1, 2, 4, and 6 above at
+fixed coefficients: 19 sampled angles from 0 to 90 degrees, pointwise initial
+energy matching, an analytic discrete linear baseline, shuffled-orientation
+nulls, separated noninteraction controls, and a prospective 1% material threshold.
+
+The full 24-seed run passes all declared gates. Its adjusted aligned-minus-
+orthogonal increment is **1.3738%** [paired bootstrap 95% interval **1.3736%,
+1.3740%**], or **0.0163927 AUC**. Both control curves satisfy simultaneous-band
+equivalence inside +/-1%. Supplementary timestep and grid checks retain the
+primary endpoint above the threshold; their smaller-sample control limitations
+are recorded separately.
+
+See [protocol](ORIENTATION_CONTROL_PROTOCOL.md) and
+[retained results](ORIENTATION_CONTROL_RESULTS_2026-09-13.md). The original run
+above remains part of the record. This follow-up changes initialization and
+does not establish a physical or retained-memory mechanism. Ordinary nonlinear
+reaction and diffusion remain the default explanation; broader parameter and
+alternative-equation tests remain open.

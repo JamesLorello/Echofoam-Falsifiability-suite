@@ -1,0 +1,51 @@
+{
+  "raw_rows": 1368,
+  "unique_seed_condition_angle_keys": 1368,
+  "statistics_replayed_identically_from_csv": true,
+  "source_hashes_match": {
+    "src/echofoam_falsifiability/orientation_control_pass.py": true,
+    "src/echofoam_falsifiability/aligned_rotated_assay.py": true,
+    "docs/ORIENTATION_CONTROL_PROTOCOL.md": true
+  },
+  "production_serial_parallel_first_171_rows_identical": true,
+  "local_tests": "49 passed on Python 3.12.14; two existing matplotlib animation warnings",
+  "lint": "flake8 fatal checks and changed-file style checks passed",
+  "package_build": "sdist and wheel passed",
+  "primary_working_tree_note": "The manifest dirty flag records untracked files from the interrupted serial run. The committed scientific source and protocol match the manifest hashes.",
+  "numerical_sensitivity": {
+    "base_four_seed_mean_fraction": 0.013739105706764185,
+    "agreement_tolerance_fraction": 0.001,
+    "checks": {
+      "timestep_halved": {
+        "primary_mean_fraction": 0.013714979993677545,
+        "difference_from_base_fraction": -2.4125713086639924e-05,
+        "within_declared_numerical_tolerance": true,
+        "primary_remains_above_material_threshold": true,
+        "standalone_four_seed_verdict": "INCONCLUSIVE_OR_CONTROLS_FAIL",
+        "standalone_gates": {
+          "pointwise_energy_matched": true,
+          "separated_packets_effectively_noninteracting": true,
+          "primary_above_material_threshold": true,
+          "shuffled_equivalent_to_zero_across_sweep": true,
+          "separated_equivalent_to_zero_across_sweep": true,
+          "coherent_exceeds_each_control": false
+        }
+      },
+      "finer_grid": {
+        "primary_mean_fraction": 0.013674019966120445,
+        "difference_from_base_fraction": -6.508574064374023e-05,
+        "within_declared_numerical_tolerance": true,
+        "primary_remains_above_material_threshold": true,
+        "standalone_four_seed_verdict": "PASS_MATERIAL_TOY_ORIENTATION_EFFECT",
+        "standalone_gates": {
+          "pointwise_energy_matched": true,
+          "separated_packets_effectively_noninteracting": true,
+          "primary_above_material_threshold": true,
+          "shuffled_equivalent_to_zero_across_sweep": true,
+          "separated_equivalent_to_zero_across_sweep": true,
+          "coherent_exceeds_each_control": true
+        }
+      }
+    }
+  }
+}
