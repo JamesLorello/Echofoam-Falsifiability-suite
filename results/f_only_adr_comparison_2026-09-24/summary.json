@@ -1,0 +1,407 @@
+{
+  "assay": "held-out F-only ADR comparison",
+  "status": "NO_MATERIAL_F_ONLY_ADR_ADVANTAGE_PRACTICAL_EQUIVALENCE",
+  "interpretation": "Held-out synthetic predictions from shared-coefficient F-only models with the declared error band. The kernel replay is the synthetic data generator itself, so this is a software and model-class check, not independent empirical evidence.",
+  "limitations": [
+    "Targets come from the specified deterministic toy kernel.",
+    "The kernel reference reuses its generator equations and parameters; it is not independently fitted.",
+    "F-only models receive shared present F, with no history labels, prep inputs, or future information.",
+    "There is no noise; all branches share zero future forcing.",
+    "Test seeds and preparation families are not used in fitting or model selection.",
+    "This establishes no physical or fundamental-theory claim."
+  ],
+  "configuration": {
+    "training_seed_ids": [
+      26090400,
+      26090401,
+      26090402,
+      26090403,
+      26090404,
+      26090405,
+      26090406,
+      26090407,
+      26090408,
+      26090409,
+      26090410,
+      26090411,
+      26090412,
+      26090413,
+      26090414,
+      26090415,
+      26090416,
+      26090417,
+      26090418,
+      26090419,
+      26090420,
+      26090421,
+      26090422,
+      26090423
+    ],
+    "training_fit_seed_ids": [
+      26090400,
+      26090401,
+      26090402,
+      26090403,
+      26090404,
+      26090405,
+      26090406,
+      26090407,
+      26090408,
+      26090409,
+      26090410,
+      26090411,
+      26090412,
+      26090413,
+      26090414,
+      26090415,
+      26090416,
+      26090417
+    ],
+    "training_selection_seed_ids": [
+      26090418,
+      26090419,
+      26090420,
+      26090421,
+      26090422,
+      26090423
+    ],
+    "heldout_test_seed_ids": [
+      26090424,
+      26090425,
+      26090426,
+      26090427,
+      26090428,
+      26090429,
+      26090430,
+      26090431,
+      26090432,
+      26090433,
+      26090434,
+      26090435,
+      26090436,
+      26090437,
+      26090438,
+      26090439,
+      26090440,
+      26090441,
+      26090442,
+      26090443,
+      26090444,
+      26090445,
+      26090446,
+      26090447
+    ],
+    "training_preparation_families": [
+      "calibration_mode_a",
+      "calibration_mode_b"
+    ],
+    "heldout_preparation_families": [
+      "heldout_harmonic_mode",
+      "heldout_two_lobe_mode"
+    ],
+    "histories_per_seed": 4,
+    "size": 32,
+    "history_steps": 100,
+    "future_steps": 100,
+    "bootstraps": 10000,
+    "bootstrap_seed_start": 26097424,
+    "excursion_amplitude": 0.03,
+    "future_forcing": "zero and identical across all branches",
+    "kernel_parameters": {
+      "dx": 0.5,
+      "dt": 0.02,
+      "velocity": [
+        0.2,
+        -0.1
+      ],
+      "D_F": 0.1,
+      "D_M": 0.05,
+      "gamma_F": 0.05,
+      "gamma_M": 0.1,
+      "alpha": 0.5,
+      "kappa": 0.5,
+      "max_abs": 1000000.0
+    },
+    "material_error_advantage_threshold": 0.001,
+    "practical_equivalence_band": [
+      -0.001,
+      0.001
+    ],
+    "primary_metric": "mean over forecast frames of ||F_prediction-F_target||_2 / ||F_present||_2",
+    "bootstrap_unit": "heldout seed cluster; four histories stay together",
+    "f_only_predictor_inputs": [
+      "shared present F*"
+    ]
+  },
+  "decision_rule": {
+    "material_kernel_advantage": "lower 95% heldout seed-cluster bootstrap bound for mean(E_ADR - E_kernel) > 0.001",
+    "classification_rule": {
+      "kernel_material_advantage": "CI lower bound > +0.001",
+      "practical_equivalence": "entire CI lies within [-0.001, +0.001]",
+      "no_material_advantage": "CI upper bound <= +0.001",
+      "inconclusive": "CI straddles +0.001"
+    },
+    "primary_model": "best of four predeclared F-only candidates selected on training validation seeds",
+    "frozen_comparator": "shared-coefficient full ADR",
+    "training_selected_model_result": "PRACTICAL_EQUIVALENCE_WITHIN_TOY_BAND"
+  },
+  "checks": {
+    "training_and_test_seeds_disjoint": true,
+    "preparation_families_held_out": true,
+    "four_histories_per_test_seed_share_exact_present": true,
+    "memory_generated_from_each_history": true,
+    "heldout_histories_produce_distinct_kernel_futures": true,
+    "shared_f_only_adr_coefficients": true,
+    "no_history_labels_or_future_inputs_to_adr": true,
+    "kernel_reference_replays_generator": true
+  },
+  "training_validation_mean_error": {
+    "adr": 2.0304616743285644e-05,
+    "advection_diffusion": 0.04861942550187992,
+    "diffusion_reaction": 0.005643606175958761,
+    "diffusion_only": 0.04894603634815928
+  },
+  "training_selected_model": "adr",
+  "test_metrics_by_model": {
+    "adr": {
+      "mean_f_only_adr_error": 2.265135680601495e-05,
+      "mean_kernel_reference_error": 0.0,
+      "delta_predict_mean_adr_minus_kernel": 2.265135680601495e-05,
+      "delta_predict_seed_cluster_bootstrap_95_percentile_ci": [
+        2.265135680601281e-05,
+        2.2651356806016977e-05
+      ],
+      "decision": "PRACTICAL_EQUIVALENCE_WITHIN_TOY_BAND",
+      "per_seed_mean_error": {
+        "26090424": 2.2651356806013707e-05,
+        "26090425": 2.265135680600904e-05,
+        "26090426": 2.265135680601416e-05,
+        "26090427": 2.265135680601138e-05,
+        "26090428": 2.2651356806018417e-05,
+        "26090429": 2.2651356806021575e-05,
+        "26090430": 2.265135680602325e-05,
+        "26090431": 2.2651356806017e-05,
+        "26090432": 2.2651356806006806e-05,
+        "26090433": 2.2651356806009418e-05,
+        "26090434": 2.265135680601788e-05,
+        "26090435": 2.2651356806012183e-05,
+        "26090436": 2.265135680601462e-05,
+        "26090437": 2.2651356806013877e-05,
+        "26090438": 2.2651356806017167e-05,
+        "26090439": 2.2651356806023516e-05,
+        "26090440": 2.2651356806018925e-05,
+        "26090441": 2.2651356806015994e-05,
+        "26090442": 2.2651356806018248e-05,
+        "26090443": 2.265135680601927e-05,
+        "26090444": 2.2651356806012572e-05,
+        "26090445": 2.265135680601872e-05,
+        "26090446": 2.265135680600893e-05,
+        "26090447": 2.2651356806002123e-05
+      },
+      "fitted_coefficients": {
+        "name": "adr",
+        "velocity": [
+          0.20000153745435326,
+          -0.10000080062224564
+        ],
+        "D_F": 0.10011797337167665,
+        "gamma_F": 0.04998159932147012,
+        "fit_residual_sum": 0.005619118477625307,
+        "fit_sign_quadrant": [
+          1,
+          -1
+        ]
+      }
+    },
+    "advection_diffusion": {
+      "mean_f_only_adr_error": 0.04861942684453041,
+      "mean_kernel_reference_error": 0.0,
+      "delta_predict_mean_adr_minus_kernel": 0.04861942684453041,
+      "delta_predict_seed_cluster_bootstrap_95_percentile_ci": [
+        0.048619426844530404,
+        0.04861942684453041
+      ],
+      "decision": "KERNEL_MATERIAL_ADVANTAGE_IN_TOY_GENERATOR",
+      "per_seed_mean_error": {
+        "26090424": 0.04861942684453041,
+        "26090425": 0.04861942684453041,
+        "26090426": 0.04861942684453039,
+        "26090427": 0.04861942684453039,
+        "26090428": 0.04861942684453041,
+        "26090429": 0.04861942684453041,
+        "26090430": 0.04861942684453041,
+        "26090431": 0.048619426844530425,
+        "26090432": 0.048619426844530404,
+        "26090433": 0.0486194268445304,
+        "26090434": 0.048619426844530404,
+        "26090435": 0.048619426844530425,
+        "26090436": 0.048619426844530404,
+        "26090437": 0.04861942684453041,
+        "26090438": 0.04861942684453041,
+        "26090439": 0.048619426844530425,
+        "26090440": 0.04861942684453041,
+        "26090441": 0.048619426844530425,
+        "26090442": 0.04861942684453039,
+        "26090443": 0.04861942684453041,
+        "26090444": 0.04861942684453039,
+        "26090445": 0.048619426844530425,
+        "26090446": 0.0486194268445304,
+        "26090447": 0.04861942684453041
+      },
+      "fitted_coefficients": {
+        "name": "advection_diffusion",
+        "velocity": [
+          0.2000015341503271,
+          -0.10000080390267109
+        ],
+        "D_F": 0.42526954427773717,
+        "gamma_F": 0.0,
+        "fit_residual_sum": 22279.69247925799,
+        "fit_sign_quadrant": [
+          1,
+          -1
+        ]
+      }
+    },
+    "diffusion_reaction": {
+      "mean_f_only_adr_error": 0.005643614378666429,
+      "mean_kernel_reference_error": 0.0,
+      "delta_predict_mean_adr_minus_kernel": 0.005643614378666429,
+      "delta_predict_seed_cluster_bootstrap_95_percentile_ci": [
+        0.005643614378666425,
+        0.005643614378666432
+      ],
+      "decision": "KERNEL_MATERIAL_ADVANTAGE_IN_TOY_GENERATOR",
+      "per_seed_mean_error": {
+        "26090424": 0.00564361437866643,
+        "26090425": 0.005643614378666444,
+        "26090426": 0.005643614378666423,
+        "26090427": 0.005643614378666438,
+        "26090428": 0.005643614378666435,
+        "26090429": 0.005643614378666417,
+        "26090430": 0.005643614378666415,
+        "26090431": 0.0056436143786664245,
+        "26090432": 0.005643614378666414,
+        "26090433": 0.005643614378666443,
+        "26090434": 0.005643614378666419,
+        "26090435": 0.005643614378666426,
+        "26090436": 0.005643614378666428,
+        "26090437": 0.005643614378666436,
+        "26090438": 0.005643614378666416,
+        "26090439": 0.005643614378666433,
+        "26090440": 0.005643614378666433,
+        "26090441": 0.005643614378666432,
+        "26090442": 0.005643614378666418,
+        "26090443": 0.005643614378666433,
+        "26090444": 0.005643614378666431,
+        "26090445": 0.005643614378666413,
+        "26090446": 0.005643614378666444,
+        "26090447": 0.00564361437866643
+      },
+      "fitted_coefficients": {
+        "name": "diffusion_reaction",
+        "velocity": [
+          0.0,
+          0.0
+        ],
+        "D_F": 0.13757346278453791,
+        "gamma_F": 0.049981599316606735,
+        "fit_residual_sum": 325.71011702496617,
+        "fit_sign_quadrant": [
+          1,
+          1
+        ]
+      }
+    },
+    "diffusion_only": {
+      "mean_f_only_adr_error": 0.04894603762088554,
+      "mean_kernel_reference_error": 0.0,
+      "delta_predict_mean_adr_minus_kernel": 0.04894603762088554,
+      "delta_predict_seed_cluster_bootstrap_95_percentile_ci": [
+        0.04894603762088554,
+        0.04894603762088556
+      ],
+      "decision": "KERNEL_MATERIAL_ADVANTAGE_IN_TOY_GENERATOR",
+      "per_seed_mean_error": {
+        "26090424": 0.04894603762088559,
+        "26090425": 0.048946037620885535,
+        "26090426": 0.048946037620885535,
+        "26090427": 0.048946037620885535,
+        "26090428": 0.048946037620885535,
+        "26090429": 0.04894603762088556,
+        "26090430": 0.04894603762088558,
+        "26090431": 0.04894603762088556,
+        "26090432": 0.04894603762088557,
+        "26090433": 0.048946037620885535,
+        "26090434": 0.04894603762088556,
+        "26090435": 0.04894603762088555,
+        "26090436": 0.04894603762088555,
+        "26090437": 0.04894603762088556,
+        "26090438": 0.048946037620885535,
+        "26090439": 0.048946037620885556,
+        "26090440": 0.048946037620885535,
+        "26090441": 0.04894603762088555,
+        "26090442": 0.04894603762088553,
+        "26090443": 0.048946037620885556,
+        "26090444": 0.04894603762088555,
+        "26090445": 0.04894603762088555,
+        "26090446": 0.04894603762088553,
+        "26090447": 0.048946037620885556
+      },
+      "fitted_coefficients": {
+        "name": "diffusion_only",
+        "velocity": [
+          0.0,
+          0.0
+        ],
+        "D_F": 0.46272503365896067,
+        "gamma_F": 0.0,
+        "fit_residual_sum": 22605.396972828672,
+        "fit_sign_quadrant": [
+          1,
+          1
+        ]
+      }
+    }
+  },
+  "heldout_kernel_branch_spread": {
+    "mean_normalized_pairwise_trajectory_separation": 1.8378078114999094e-05,
+    "seed_cluster_bootstrap_95_percentile_ci": [
+      1.8378078114996204e-05,
+      1.837807811500181e-05
+    ],
+    "per_seed": {
+      "26090424": 1.837807811498916e-05,
+      "26090425": 1.837807811499213e-05,
+      "26090426": 1.8378078114991698e-05,
+      "26090427": 1.8378078115000094e-05,
+      "26090428": 1.8378078114996302e-05,
+      "26090429": 1.8378078115005572e-05,
+      "26090430": 1.8378078115012237e-05,
+      "26090431": 1.837807811500122e-05,
+      "26090432": 1.8378078114994995e-05,
+      "26090433": 1.8378078114990705e-05,
+      "26090434": 1.837807811500604e-05,
+      "26090435": 1.8378078115003834e-05,
+      "26090436": 1.8378078114995154e-05,
+      "26090437": 1.837807811500585e-05,
+      "26090438": 1.8378078114998335e-05,
+      "26090439": 1.8378078115000155e-05,
+      "26090440": 1.8378078115005532e-05,
+      "26090441": 1.8378078115004525e-05,
+      "26090442": 1.8378078114995127e-05,
+      "26090443": 1.837807811499818e-05,
+      "26090444": 1.8378078115002083e-05,
+      "26090445": 1.8378078115006402e-05,
+      "26090446": 1.8378078115002045e-05,
+      "26090447": 1.8378078114980822e-05
+    }
+  },
+  "provenance": {
+    "git_revision": "ccc166894e8e11179ee4023c510d7cdeace9b779",
+    "f_only_adr_comparison_sha256": "9c9a0f5b1a034113a03f130f9299dc347c1c69f28d9622755ba8f82bae9fd7a9",
+    "compatible_history_replay_sha256": "0aaf4a51e96a4b984de69830fb073fb6927c82e2c4934c21e050171cb1df9375",
+    "local_dynamical_memory_sha256": "79d2ddea0b59fe72e284e17c06878f30de5af5cf03bc5ec332fc3b53d69003fd"
+  },
+  "output": "results/f_only_adr_comparison_2026-09-24"
+}
