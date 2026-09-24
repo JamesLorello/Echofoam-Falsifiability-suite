@@ -35,6 +35,10 @@ Separated branches are a methodological improvement because contributions can fa
 
 A history-dependent effect counts only when the present gate emerges from local dynamics. The update rule may not contain the evaluation score, global overlap, or an equivalent hand-coded gate. Status: **open**.
 
+### Local dynamical-memory compatible-history replay
+
+A controlled replay paired two prescribed field histories with the same exact endpoint. The memory update generated different retained `M` fields, and continuing from the shared `F` produced a relative future-field separation of about `2.05e-5`. Zero-memory and feedback-off controls produced zero separation. A spatial shuffle reduced the response; rotating the memory vectors by 90 degrees increased it. Status: **internal toy behavior**. The field histories were prescribed controls, not autonomous solutions or physical data. Autonomous compatible-history convergence and comparison with conventional internal-variable models remain open.
+
 ## Interpretation boundary
 
 A successful code run establishes execution. A conserved numerical quantity establishes implementation bookkeeping. A correlation establishes association inside the model. None of these alone establishes a new physical field or law.
