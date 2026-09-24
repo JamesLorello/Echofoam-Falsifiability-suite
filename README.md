@@ -128,6 +128,15 @@ python -m echofoam_falsifiability.standard_memory_comparison \
 The run saves training candidate scores, held-out per-seed and per-history
 errors, model settings, source hashes, and uncertainty intervals.
 
+In the 2026-09-24 run, training selected the zero-gain boundary (`c=0`), which
+reduces the Maxwell comparator to the F-only model. Its held-out normalized
+trajectory error was `2.3525e-5`; the 95% seed-cluster interval for
+Maxwell-minus-kernel error was wholly inside `±0.001`. The selected model had
+zero gain over F-only. This is practical equivalence at the declared material
+scale, not evidence that a positive-gain Maxwell state captured the history
+effect. The targets remain kernel-generated synthetic trajectories. Raw output
+is in [`results/standard_memory_comparison_2026-09-24/`](results/standard_memory_comparison_2026-09-24/).
+
 ## Repository policy
 
 - `src/echofoam_falsifiability/` is the only canonical Python package.
