@@ -63,6 +63,11 @@ def advection(a: np.ndarray, velocity, dx: float) -> np.ndarray:
     )
 
 
+def _memory_cfl(p: Parameters) -> float:
+    return p.dt * (sum(abs(v) for v in p.velocity) / p.dx
+                   + 4 * p.D_M / p.dx**2 + p.gamma_M)
+
+
 def _fields(F, M, p: Parameters) -> tuple[np.ndarray, np.ndarray]:
     if np.iscomplexobj(F) or np.iscomplexobj(M):
         raise ValueError("this minimal kernel accepts real fields only")
@@ -74,6 +79,36 @@ def _fields(F, M, p: Parameters) -> tuple[np.ndarray, np.ndarray]:
     if max(np.max(np.abs(F)), np.max(np.abs(M))) > p.max_abs:
         raise FloatingPointError("field or memory exceeded max_abs; no clipping is applied")
     return F, M
+
+
+def advance_memory(F_previous, F_current, M, p: Parameters = Parameters()) -> np.ndarray:
+    """Advance M across one supplied field transition using the kernel write law.
+
+    The field transition may be a recorded or controlled replay frame. This
+    function evolves M only; it does not assert that the supplied F path solves
+    the autonomous field equation.
+    """
+    F_previous, M = _fields(F_previous, M, p)
+    if np.iscomplexobj(F_current):
+        raise ValueError("this minimal kernel accepts real fields only")
+    F_current = np.asarray(F_current, dtype=float)
+    if F_current.shape != F_previous.shape:
+        raise ValueError("previous and current F fields must have the same shape")
+    if not np.isfinite(F_current).all():
+        raise FloatingPointError("nonfinite current field")
+    if np.max(np.abs(F_current)) > p.max_abs:
+        raise FloatingPointError("field exceeded max_abs; no clipping is applied")
+    if _memory_cfl(p) > 1:
+        raise ValueError("memory CFL guard exceeded: reduce dt")
+
+    with np.errstate(over="raise", invalid="raise", divide="raise"):
+        gradient_previous = gradient(np.abs(F_previous), p.dx)
+        write = (gradient(np.abs(F_current), p.dx) - gradient_previous
+                 + p.dt * advection(gradient_previous, p.velocity, p.dx))
+        M_new = (M + p.dt * (-advection(M, p.velocity, p.dx)
+                             + p.D_M * laplacian(M, p.dx) - p.gamma_M * M)
+                 + p.alpha * write)
+    return _fields(F_current, M_new, p)[1]
 
 
 def step(F, M, p: Parameters = Parameters()) -> tuple[np.ndarray, np.ndarray]:
@@ -94,18 +129,13 @@ def step(F, M, p: Parameters = Parameters()) -> tuple[np.ndarray, np.ndarray]:
                     p.velocity[1] + p.kappa * M[1])
         field_cfl = p.dt * (np.max(np.abs(velocity[0]) + np.abs(velocity[1])) / p.dx
                             + 4 * p.D_F / p.dx**2 + p.gamma_F)
-        memory_cfl = p.dt * (sum(abs(v) for v in p.velocity) / p.dx
-                             + 4 * p.D_M / p.dx**2 + p.gamma_M)
+        memory_cfl = _memory_cfl(p)
         if max(field_cfl, memory_cfl) > 1:
             raise ValueError("CFL guard exceeded: reduce dt (including feedback velocity)")
 
         F_new = F + p.dt * (-advection(F, velocity, p.dx)
                             + p.D_F * laplacian(F, p.dx) - p.gamma_F * F)
-        g = gradient(np.abs(F), p.dx)
-        write = (gradient(np.abs(F_new), p.dx) - g
-                 + p.dt * advection(g, p.velocity, p.dx))
-        M_new = M + p.dt * (-advection(M, p.velocity, p.dx)
-                            + p.D_M * laplacian(M, p.dx) - p.gamma_M * M) + p.alpha * write
+        M_new = advance_memory(F, F_new, M, p)
     return _fields(F_new, M_new, p)
 
 

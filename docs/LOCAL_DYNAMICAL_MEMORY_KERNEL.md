@@ -79,7 +79,7 @@ The present behavior can still arise from ordinary nonlinear PDE structure becau
 
 1. Compare against passive-vector transport with no write-feedback loop.
 2. Match delayed-memory amplitude distributions to rule out trivial attenuation with delay.
-3. Freeze a present `F` state and replay multiple compatible histories that converge to that same present state. Test whether different retained `M` fields produce different futures.
+3. A first controlled compatible-history replay is implemented in [`COMPATIBLE_HISTORY_REPLAY_PROTOCOL.md`](COMPATIBLE_HISTORY_REPLAY_PROTOCOL.md). Its field tapes are prescribed; autonomous histories converging to a shared present `F` remain untested.
 4. Search for a prediction of the kernel that differs from standard advection-diffusion-reaction models without explicit history state.
 5. Sweep `alpha`, `kappa`, `gamma_M`, `D_M`, resolution, timestep, packet geometry, and noise level.
 6. Check numerical convergence and CFL/stability margins.
@@ -96,6 +96,7 @@ The strongest defensible interpretation is a minimal local dynamical memory mech
 - The rectangular 2D grid is periodic, with equal spacing `dx` in both directions and a constant background velocity `(Vx, Vy)`.
 - The local reaction is `R(F) = -gamma_F F`. Diffusion, relaxation, write strength `alpha`, and feedback strength `kappa` are nonnegative. All quantities are dimensionless toy variables.
 - `step(F, M, Parameters(...))` returns new arrays without mutating its inputs. `simulate(..., steps=N)` returns the final arrays; there is no hidden history buffer or random forcing.
+- `advance_memory(F_previous, F_current, M, Parameters(...))` applies the same memory update to one supplied field transition. It supports controlled replay tapes and makes no claim that a supplied transition solves the autonomous field equation.
 
 Let `G` be the centered gradient, `L` the five-point Laplacian, and `U_v` the first-order upwind approximation of `v dot grad`, applied componentwise to vectors. One explicit step is:
 
@@ -124,9 +125,10 @@ From the repository root, install and run the deterministic paired demonstration
 ```bash
 python -m pip install -e ".[test]"
 python -m echofoam_falsifiability.local_dynamical_memory --size 32 --steps 500 --seed 20260914 --dt 0.02
-python -m pytest -q tests/test_local_dynamical_memory.py
+python -m echofoam_falsifiability.compatible_history_replay --pairs 24 --size 32 --history-steps 100 --future-steps 100 --seed 20260924 --bootstraps 10000 --output results/compatible_history_replay_2026-09-24
+python -m pytest -q tests/test_local_dynamical_memory.py tests/test_compatible_history_replay.py
 ```
 
 The demonstration uses identical seeded `F` and zero initial `M` in coupled and `kappa=0` runs. It prints parameters, final time, field RMS difference, and memory diagnostics as JSON. The focused tests check constant and stationary-gradient states, signed writing against an analytic decaying Fourier mode, rigid periodic transport, source-free sum conservation, translation and field-sign symmetries, deterministic trajectories, finite-horizon bounds, the no-feedback control, directional feedback, and invalid or unstable input rejection. The repository's existing `python -m pytest -q` command includes these tests.
 
-This realization does not rerun or reproduce the historical persistence percentages above, which came from different assays. A coupled/control difference demonstrates the effect of the imposed feedback term inside this discrete toy model. It does not validate a physical memory field or close the six required next tests.
+This realization does not rerun or reproduce the historical persistence percentages above, which came from different assays. A coupled/control difference demonstrates the effect of the imposed feedback term inside this discrete toy model. The controlled replay pass checks one software-level consequence using prescribed field tapes; autonomous compatible-history convergence, comparison with conventional internal-variable models, and physical validation remain open.

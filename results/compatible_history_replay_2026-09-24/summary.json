@@ -1,0 +1,537 @@
+{
+  "assay": "controlled compatible-history replay",
+  "status": "TOY_MECHANISM_CHECK_PASS",
+  "interpretation": "A pass shows that the implemented write and feedback laws transmit differences between controlled field histories into later toy-model evolution.",
+  "limitations": [
+    "History tapes are prescribed controls, not autonomous kernel solutions or physical data.",
+    "The benchmark does not distinguish this memory law from standard internal-variable models.",
+    "No physical validation is established.",
+    "Bootstrap intervals describe variability over the declared synthetic phase seeds."
+  ],
+  "configuration": {
+    "pairs": 24,
+    "size": 32,
+    "history_steps": 100,
+    "future_steps": 100,
+    "first_seed": 20260924,
+    "last_seed": 20260947,
+    "bootstraps": 10000,
+    "bootstrap_seed": 20260924,
+    "excursion_amplitude": 0.03,
+    "parameters": {
+      "dx": 0.5,
+      "dt": 0.02,
+      "velocity": [
+        0.2,
+        -0.1
+      ],
+      "D_F": 0.1,
+      "D_M": 0.05,
+      "gamma_F": 0.05,
+      "gamma_M": 0.1,
+      "alpha": 0.5,
+      "kappa": 0.5,
+      "max_abs": 1000000.0
+    },
+    "memory_initialization": "zero; M is advanced from each field tape by advance_memory"
+  },
+  "decision_rule": {
+    "primary_observable": "mean final RMS(F_A - F_B) / RMS(F_present)",
+    "numerical_tolerance": 1e-12,
+    "pass_requires": {
+      "identical_present_field": true,
+      "history_wrote_different_memory": true,
+      "history_write_amplitudes_matched": true,
+      "natural_memory_changes_future": true,
+      "memory_reset_null": true,
+      "feedback_off_null": true
+    },
+    "controls": [
+      "zero-memory reset",
+      "kappa=0 feedback-off",
+      "90-degree vector rotation",
+      "spatial shuffle of vector pairs"
+    ]
+  },
+  "checks": {
+    "identical_present_field": true,
+    "history_wrote_different_memory": true,
+    "history_write_amplitudes_matched": true,
+    "natural_memory_changes_future": true,
+    "memory_reset_null": true,
+    "feedback_off_null": true
+  },
+  "metrics": {
+    "memory_difference_rms": {
+      "mean": 0.0010161458162751312,
+      "bootstrap_95_percentile_ci": [
+        0.0010161458162751312,
+        0.0010161458162751312
+      ]
+    },
+    "future_separation_relative": {
+      "mean": 2.046486964610266e-05,
+      "bootstrap_95_percentile_ci": [
+        2.046486964609515e-05,
+        2.0464869646109454e-05
+      ]
+    },
+    "rotated_memory_separation_relative": {
+      "mean": 4.265542310752412e-05,
+      "bootstrap_95_percentile_ci": [
+        4.2655423107519355e-05,
+        4.26554231075288e-05
+      ]
+    },
+    "shuffled_memory_separation_relative": {
+      "mean": 7.029122331519199e-06,
+      "bootstrap_95_percentile_ci": [
+        6.820801406511353e-06,
+        7.250471568312641e-06
+      ]
+    },
+    "reset_memory_separation_relative": {
+      "mean": 0.0,
+      "bootstrap_95_percentile_ci": [
+        0.0,
+        0.0
+      ]
+    },
+    "feedback_off_separation_relative": {
+      "mean": 0.0,
+      "bootstrap_95_percentile_ci": [
+        0.0,
+        0.0
+      ]
+    },
+    "history_delta_a_rms": {
+      "mean": 0.0005080729081375656,
+      "bootstrap_95_percentile_ci": [
+        0.0005080729081375655,
+        0.0005080729081375657
+      ]
+    },
+    "history_delta_b_rms": {
+      "mean": 0.0005080729081375655,
+      "bootstrap_95_percentile_ci": [
+        0.0005080729081375655,
+        0.0005080729081375656
+      ]
+    },
+    "history_delta_pair_mismatch_rms": {
+      "mean": 3.682539524154567e-18,
+      "bootstrap_95_percentile_ci": [
+        3.59328320035065e-18,
+        3.770549175585355e-18
+      ]
+    }
+  },
+  "paired_control_differences": {
+    "natural_minus_rotated_memory_separation_relative": {
+      "mean": -2.2190553461421458e-05,
+      "bootstrap_95_percentile_ci": [
+        -2.2190553461429057e-05,
+        -2.2190553461413855e-05
+      ]
+    },
+    "natural_minus_shuffled_memory_separation_relative": {
+      "mean": 1.3435747314583464e-05,
+      "bootstrap_95_percentile_ci": [
+        1.321674975950772e-05,
+        1.3640770983504376e-05
+      ]
+    }
+  },
+  "provenance": {
+    "git_revision": "194ac74e0da44da6ec411e22c149a89a4a93a122",
+    "compatible_history_replay_sha256": "0aaf4a51e96a4b984de69830fb073fb6927c82e2c4934c21e050171cb1df9375",
+    "local_dynamical_memory_sha256": "79d2ddea0b59fe72e284e17c06878f30de5af5cf03bc5ec332fc3b53d69003fd"
+  },
+  "runs": [
+    {
+      "seed": 20260924,
+      "present_match_max_abs": 0.0,
+      "memory_a_rms": 0.001596298614903952,
+      "memory_b_rms": 0.0016256075933881234,
+      "memory_difference_rms": 0.0010161458162751315,
+      "stationary_baseline_memory_rms": 0.001528805604983622,
+      "history_delta_a_rms": 0.0005080729081375655,
+      "history_delta_b_rms": 0.0005080729081375659,
+      "history_delta_pair_mismatch_rms": 3.500393554202555e-18,
+      "future_separation_relative": 2.0464869646100543e-05,
+      "reset_memory_separation_relative": 0.0,
+      "feedback_off_separation_relative": 0.0,
+      "rotated_memory_separation_relative": 4.265542310751517e-05,
+      "shuffled_memory_separation_relative": 7.318771375877407e-06
+    },
+    {
+      "seed": 20260925,
+      "present_match_max_abs": 0.0,
+      "memory_a_rms": 0.0015962986149039519,
+      "memory_b_rms": 0.0016256075933881234,
+      "memory_difference_rms": 0.001016145816275131,
+      "stationary_baseline_memory_rms": 0.0015288056049836218,
+      "history_delta_a_rms": 0.0005080729081375657,
+      "history_delta_b_rms": 0.0005080729081375653,
+      "history_delta_pair_mismatch_rms": 3.700644972721796e-18,
+      "future_separation_relative": 2.046486964609556e-05,
+      "reset_memory_separation_relative": 0.0,
+      "feedback_off_separation_relative": 0.0,
+      "rotated_memory_separation_relative": 4.265542310754149e-05,
+      "shuffled_memory_separation_relative": 6.651110563472538e-06
+    },
+    {
+      "seed": 20260926,
+      "present_match_max_abs": 0.0,
+      "memory_a_rms": 0.001596298614903952,
+      "memory_b_rms": 0.001625607593388123,
+      "memory_difference_rms": 0.0010161458162751312,
+      "stationary_baseline_memory_rms": 0.0015288056049836218,
+      "history_delta_a_rms": 0.000508072908137566,
+      "history_delta_b_rms": 0.0005080729081375653,
+      "history_delta_pair_mismatch_rms": 3.5685259820163306e-18,
+      "future_separation_relative": 2.0464869646117836e-05,
+      "reset_memory_separation_relative": 0.0,
+      "feedback_off_separation_relative": 0.0,
+      "rotated_memory_separation_relative": 4.2655423107531945e-05,
+      "shuffled_memory_separation_relative": 6.691608344455514e-06
+    },
+    {
+      "seed": 20260927,
+      "present_match_max_abs": 0.0,
+      "memory_a_rms": 0.0015962986149039523,
+      "memory_b_rms": 0.0016256075933881234,
+      "memory_difference_rms": 0.0010161458162751317,
+      "stationary_baseline_memory_rms": 0.001528805604983622,
+      "history_delta_a_rms": 0.0005080729081375656,
+      "history_delta_b_rms": 0.000508072908137566,
+      "history_delta_pair_mismatch_rms": 3.828076169965354e-18,
+      "future_separation_relative": 2.046486964611862e-05,
+      "reset_memory_separation_relative": 0.0,
+      "feedback_off_separation_relative": 0.0,
+      "rotated_memory_separation_relative": 4.265542310751732e-05,
+      "shuffled_memory_separation_relative": 6.992256160870436e-06
+    },
+    {
+      "seed": 20260928,
+      "present_match_max_abs": 0.0,
+      "memory_a_rms": 0.0015962986149039523,
+      "memory_b_rms": 0.0016256075933881232,
+      "memory_difference_rms": 0.001016145816275131,
+      "stationary_baseline_memory_rms": 0.001528805604983622,
+      "history_delta_a_rms": 0.0005080729081375654,
+      "history_delta_b_rms": 0.0005080729081375654,
+      "history_delta_pair_mismatch_rms": 3.603268201882635e-18,
+      "future_separation_relative": 2.04648696461102e-05,
+      "reset_memory_separation_relative": 0.0,
+      "feedback_off_separation_relative": 0.0,
+      "rotated_memory_separation_relative": 4.265542310751579e-05,
+      "shuffled_memory_separation_relative": 7.187221007445921e-06
+    },
+    {
+      "seed": 20260929,
+      "present_match_max_abs": 0.0,
+      "memory_a_rms": 0.0015962986149039523,
+      "memory_b_rms": 0.0016256075933881234,
+      "memory_difference_rms": 0.001016145816275131,
+      "stationary_baseline_memory_rms": 0.0015288056049836223,
+      "history_delta_a_rms": 0.0005080729081375656,
+      "history_delta_b_rms": 0.0005080729081375654,
+      "history_delta_pair_mismatch_rms": 3.5235560667406996e-18,
+      "future_separation_relative": 2.0464869646107814e-05,
+      "reset_memory_separation_relative": 0.0,
+      "feedback_off_separation_relative": 0.0,
+      "rotated_memory_separation_relative": 4.265542310752206e-05,
+      "shuffled_memory_separation_relative": 7.548524006425971e-06
+    },
+    {
+      "seed": 20260930,
+      "present_match_max_abs": 0.0,
+      "memory_a_rms": 0.001596298614903952,
+      "memory_b_rms": 0.0016256075933881234,
+      "memory_difference_rms": 0.001016145816275131,
+      "stationary_baseline_memory_rms": 0.0015288056049836225,
+      "history_delta_a_rms": 0.0005080729081375655,
+      "history_delta_b_rms": 0.0005080729081375655,
+      "history_delta_pair_mismatch_rms": 3.6594630971034064e-18,
+      "future_separation_relative": 2.0464869646101055e-05,
+      "reset_memory_separation_relative": 0.0,
+      "feedback_off_separation_relative": 0.0,
+      "rotated_memory_separation_relative": 4.265542310752728e-05,
+      "shuffled_memory_separation_relative": 6.892012536833439e-06
+    },
+    {
+      "seed": 20260931,
+      "present_match_max_abs": 0.0,
+      "memory_a_rms": 0.001596298614903952,
+      "memory_b_rms": 0.0016256075933881232,
+      "memory_difference_rms": 0.0010161458162751312,
+      "stationary_baseline_memory_rms": 0.0015288056049836218,
+      "history_delta_a_rms": 0.0005080729081375659,
+      "history_delta_b_rms": 0.0005080729081375653,
+      "history_delta_pair_mismatch_rms": 3.7486405562323115e-18,
+      "future_separation_relative": 2.0464869646109678e-05,
+      "reset_memory_separation_relative": 0.0,
+      "feedback_off_separation_relative": 0.0,
+      "rotated_memory_separation_relative": 4.265542310752151e-05,
+      "shuffled_memory_separation_relative": 6.826708854762026e-06
+    },
+    {
+      "seed": 20260932,
+      "present_match_max_abs": 0.0,
+      "memory_a_rms": 0.001596298614903952,
+      "memory_b_rms": 0.0016256075933881234,
+      "memory_difference_rms": 0.001016145816275131,
+      "stationary_baseline_memory_rms": 0.0015288056049836216,
+      "history_delta_a_rms": 0.0005080729081375656,
+      "history_delta_b_rms": 0.0005080729081375654,
+      "history_delta_pair_mismatch_rms": 3.3342995527426488e-18,
+      "future_separation_relative": 2.0464869646112307e-05,
+      "reset_memory_separation_relative": 0.0,
+      "feedback_off_separation_relative": 0.0,
+      "rotated_memory_separation_relative": 4.265542310754271e-05,
+      "shuffled_memory_separation_relative": 6.770566856876064e-06
+    },
+    {
+      "seed": 20260933,
+      "present_match_max_abs": 0.0,
+      "memory_a_rms": 0.001596298614903952,
+      "memory_b_rms": 0.0016256075933881234,
+      "memory_difference_rms": 0.001016145816275131,
+      "stationary_baseline_memory_rms": 0.0015288056049836223,
+      "history_delta_a_rms": 0.0005080729081375658,
+      "history_delta_b_rms": 0.0005080729081375652,
+      "history_delta_pair_mismatch_rms": 3.607996868397433e-18,
+      "future_separation_relative": 2.046486964611776e-05,
+      "reset_memory_separation_relative": 0.0,
+      "feedback_off_separation_relative": 0.0,
+      "rotated_memory_separation_relative": 4.265542310750047e-05,
+      "shuffled_memory_separation_relative": 6.739395652120433e-06
+    },
+    {
+      "seed": 20260934,
+      "present_match_max_abs": 0.0,
+      "memory_a_rms": 0.0015962986149039523,
+      "memory_b_rms": 0.0016256075933881234,
+      "memory_difference_rms": 0.0010161458162751312,
+      "stationary_baseline_memory_rms": 0.0015288056049836214,
+      "history_delta_a_rms": 0.0005080729081375658,
+      "history_delta_b_rms": 0.0005080729081375653,
+      "history_delta_pair_mismatch_rms": 3.888272061364369e-18,
+      "future_separation_relative": 2.0464869646078693e-05,
+      "reset_memory_separation_relative": 0.0,
+      "feedback_off_separation_relative": 0.0,
+      "rotated_memory_separation_relative": 4.265542310754379e-05,
+      "shuffled_memory_separation_relative": 6.950875081614964e-06
+    },
+    {
+      "seed": 20260935,
+      "present_match_max_abs": 0.0,
+      "memory_a_rms": 0.0015962986149039523,
+      "memory_b_rms": 0.0016256075933881234,
+      "memory_difference_rms": 0.0010161458162751315,
+      "stationary_baseline_memory_rms": 0.0015288056049836218,
+      "history_delta_a_rms": 0.0005080729081375658,
+      "history_delta_b_rms": 0.0005080729081375656,
+      "history_delta_pair_mismatch_rms": 4.143780407479035e-18,
+      "future_separation_relative": 2.0464869646088048e-05,
+      "reset_memory_separation_relative": 0.0,
+      "feedback_off_separation_relative": 0.0,
+      "rotated_memory_separation_relative": 4.265542310752652e-05,
+      "shuffled_memory_separation_relative": 6.220493481066849e-06
+    },
+    {
+      "seed": 20260936,
+      "present_match_max_abs": 0.0,
+      "memory_a_rms": 0.0015962986149039523,
+      "memory_b_rms": 0.0016256075933881234,
+      "memory_difference_rms": 0.0010161458162751312,
+      "stationary_baseline_memory_rms": 0.0015288056049836218,
+      "history_delta_a_rms": 0.0005080729081375652,
+      "history_delta_b_rms": 0.000508072908137566,
+      "history_delta_pair_mismatch_rms": 3.509330181404931e-18,
+      "future_separation_relative": 2.0464869646104714e-05,
+      "reset_memory_separation_relative": 0.0,
+      "feedback_off_separation_relative": 0.0,
+      "rotated_memory_separation_relative": 4.265542310752345e-05,
+      "shuffled_memory_separation_relative": 6.250462389582319e-06
+    },
+    {
+      "seed": 20260937,
+      "present_match_max_abs": 0.0,
+      "memory_a_rms": 0.0015962986149039525,
+      "memory_b_rms": 0.0016256075933881234,
+      "memory_difference_rms": 0.0010161458162751312,
+      "stationary_baseline_memory_rms": 0.0015288056049836223,
+      "history_delta_a_rms": 0.0005080729081375656,
+      "history_delta_b_rms": 0.0005080729081375655,
+      "history_delta_pair_mismatch_rms": 4.021523327406354e-18,
+      "future_separation_relative": 2.04648696461119e-05,
+      "reset_memory_separation_relative": 0.0,
+      "feedback_off_separation_relative": 0.0,
+      "rotated_memory_separation_relative": 4.265542310753475e-05,
+      "shuffled_memory_separation_relative": 8.446196954494794e-06
+    },
+    {
+      "seed": 20260938,
+      "present_match_max_abs": 0.0,
+      "memory_a_rms": 0.0015962986149039523,
+      "memory_b_rms": 0.0016256075933881234,
+      "memory_difference_rms": 0.001016145816275131,
+      "stationary_baseline_memory_rms": 0.0015288056049836214,
+      "history_delta_a_rms": 0.0005080729081375656,
+      "history_delta_b_rms": 0.0005080729081375654,
+      "history_delta_pair_mismatch_rms": 3.849280815834588e-18,
+      "future_separation_relative": 2.0464869646108153e-05,
+      "reset_memory_separation_relative": 0.0,
+      "feedback_off_separation_relative": 0.0,
+      "rotated_memory_separation_relative": 4.2655423107522824e-05,
+      "shuffled_memory_separation_relative": 7.476665780885321e-06
+    },
+    {
+      "seed": 20260939,
+      "present_match_max_abs": 0.0,
+      "memory_a_rms": 0.0015962986149039523,
+      "memory_b_rms": 0.0016256075933881234,
+      "memory_difference_rms": 0.0010161458162751312,
+      "stationary_baseline_memory_rms": 0.0015288056049836218,
+      "history_delta_a_rms": 0.0005080729081375655,
+      "history_delta_b_rms": 0.0005080729081375656,
+      "history_delta_pair_mismatch_rms": 3.1850087785024135e-18,
+      "future_separation_relative": 2.046486964611062e-05,
+      "reset_memory_separation_relative": 0.0,
+      "feedback_off_separation_relative": 0.0,
+      "rotated_memory_separation_relative": 4.2655423107542604e-05,
+      "shuffled_memory_separation_relative": 7.570264259508248e-06
+    },
+    {
+      "seed": 20260940,
+      "present_match_max_abs": 0.0,
+      "memory_a_rms": 0.001596298614903952,
+      "memory_b_rms": 0.0016256075933881234,
+      "memory_difference_rms": 0.0010161458162751312,
+      "stationary_baseline_memory_rms": 0.0015288056049836223,
+      "history_delta_a_rms": 0.0005080729081375655,
+      "history_delta_b_rms": 0.0005080729081375656,
+      "history_delta_pair_mismatch_rms": 3.774716394482994e-18,
+      "future_separation_relative": 2.0464869646099056e-05,
+      "reset_memory_separation_relative": 0.0,
+      "feedback_off_separation_relative": 0.0,
+      "rotated_memory_separation_relative": 4.265542310752706e-05,
+      "shuffled_memory_separation_relative": 7.310998338427789e-06
+    },
+    {
+      "seed": 20260941,
+      "present_match_max_abs": 0.0,
+      "memory_a_rms": 0.001596298614903952,
+      "memory_b_rms": 0.0016256075933881234,
+      "memory_difference_rms": 0.001016145816275131,
+      "stationary_baseline_memory_rms": 0.0015288056049836214,
+      "history_delta_a_rms": 0.0005080729081375656,
+      "history_delta_b_rms": 0.0005080729081375655,
+      "history_delta_pair_mismatch_rms": 3.677312548123011e-18,
+      "future_separation_relative": 2.0464869646120096e-05,
+      "reset_memory_separation_relative": 0.0,
+      "feedback_off_separation_relative": 0.0,
+      "rotated_memory_separation_relative": 4.265542310752326e-05,
+      "shuffled_memory_separation_relative": 7.249933237794759e-06
+    },
+    {
+      "seed": 20260942,
+      "present_match_max_abs": 0.0,
+      "memory_a_rms": 0.0015962986149039525,
+      "memory_b_rms": 0.0016256075933881236,
+      "memory_difference_rms": 0.0010161458162751312,
+      "stationary_baseline_memory_rms": 0.0015288056049836218,
+      "history_delta_a_rms": 0.0005080729081375656,
+      "history_delta_b_rms": 0.0005080729081375657,
+      "history_delta_pair_mismatch_rms": 3.494139756726832e-18,
+      "future_separation_relative": 2.0464869646105368e-05,
+      "reset_memory_separation_relative": 0.0,
+      "feedback_off_separation_relative": 0.0,
+      "rotated_memory_separation_relative": 4.2655423107524817e-05,
+      "shuffled_memory_separation_relative": 6.8403712356922924e-06
+    },
+    {
+      "seed": 20260943,
+      "present_match_max_abs": 0.0,
+      "memory_a_rms": 0.0015962986149039525,
+      "memory_b_rms": 0.0016256075933881236,
+      "memory_difference_rms": 0.0010161458162751312,
+      "stationary_baseline_memory_rms": 0.0015288056049836218,
+      "history_delta_a_rms": 0.0005080729081375657,
+      "history_delta_b_rms": 0.0005080729081375654,
+      "history_delta_pair_mismatch_rms": 3.805295114884383e-18,
+      "future_separation_relative": 2.0464869646069457e-05,
+      "reset_memory_separation_relative": 0.0,
+      "feedback_off_separation_relative": 0.0,
+      "rotated_memory_separation_relative": 4.265542310750198e-05,
+      "shuffled_memory_separation_relative": 6.462946820734715e-06
+    },
+    {
+      "seed": 20260944,
+      "present_match_max_abs": 0.0,
+      "memory_a_rms": 0.0015962986149039523,
+      "memory_b_rms": 0.0016256075933881234,
+      "memory_difference_rms": 0.001016145816275131,
+      "stationary_baseline_memory_rms": 0.0015288056049836225,
+      "history_delta_a_rms": 0.0005080729081375655,
+      "history_delta_b_rms": 0.0005080729081375656,
+      "history_delta_pair_mismatch_rms": 4.082167003142838e-18,
+      "future_separation_relative": 2.0464869646072825e-05,
+      "reset_memory_separation_relative": 0.0,
+      "feedback_off_separation_relative": 0.0,
+      "rotated_memory_separation_relative": 4.265542310751909e-05,
+      "shuffled_memory_separation_relative": 7.40149692319866e-06
+    },
+    {
+      "seed": 20260945,
+      "present_match_max_abs": 0.0,
+      "memory_a_rms": 0.0015962986149039523,
+      "memory_b_rms": 0.0016256075933881234,
+      "memory_difference_rms": 0.001016145816275131,
+      "stationary_baseline_memory_rms": 0.001528805604983622,
+      "history_delta_a_rms": 0.0005080729081375654,
+      "history_delta_b_rms": 0.0005080729081375656,
+      "history_delta_pair_mismatch_rms": 3.416261028214572e-18,
+      "future_separation_relative": 2.046486964605584e-05,
+      "reset_memory_separation_relative": 0.0,
+      "feedback_off_separation_relative": 0.0,
+      "rotated_memory_separation_relative": 4.265542310750146e-05,
+      "shuffled_memory_separation_relative": 8.008179002154759e-06
+    },
+    {
+      "seed": 20260946,
+      "present_match_max_abs": 0.0,
+      "memory_a_rms": 0.001596298614903952,
+      "memory_b_rms": 0.0016256075933881234,
+      "memory_difference_rms": 0.0010161458162751312,
+      "stationary_baseline_memory_rms": 0.0015288056049836218,
+      "history_delta_a_rms": 0.0005080729081375653,
+      "history_delta_b_rms": 0.0005080729081375658,
+      "history_delta_pair_mismatch_rms": 3.7380614821203694e-18,
+      "future_separation_relative": 2.0464869646136732e-05,
+      "reset_memory_separation_relative": 0.0,
+      "feedback_off_separation_relative": 0.0,
+      "rotated_memory_separation_relative": 4.265542310752296e-05,
+      "shuffled_memory_separation_relative": 6.680507484862104e-06
+    },
+    {
+      "seed": 20260947,
+      "present_match_max_abs": 0.0,
+      "memory_a_rms": 0.0015962986149039523,
+      "memory_b_rms": 0.0016256075933881234,
+      "memory_difference_rms": 0.0010161458162751312,
+      "stationary_baseline_memory_rms": 0.0015288056049836223,
+      "history_delta_a_rms": 0.0005080729081375656,
+      "history_delta_b_rms": 0.0005080729081375655,
+      "history_delta_pair_mismatch_rms": 3.720934658017749e-18,
+      "future_separation_relative": 2.0464869646111016e-05,
+      "reset_memory_separation_relative": 0.0,
+      "feedback_off_separation_relative": 0.0,
+      "rotated_memory_separation_relative": 4.2655423107528604e-05,
+      "shuffled_memory_separation_relative": 6.211369607303442e-06
+    }
+  ],
+  "output": "results/compatible_history_replay_2026-09-24"
+}
